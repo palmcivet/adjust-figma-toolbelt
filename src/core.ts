@@ -1,11 +1,30 @@
-export function moveToolbeltToTop(element: HTMLElement, top: number) {
+import { getToolbeltPosition } from "./persistent";
+
+export function moveToolbeltToTop(element: HTMLElement, top: number): Position {
   const { height: toolbeltHeight } = element.getBoundingClientRect();
   const { innerHeight: viewportHeight } = window;
-  element.style.bottom = `${viewportHeight - toolbeltHeight - top}px`;
+
+  const bottom = viewportHeight - toolbeltHeight - top;
+  element.style.bottom = `${bottom}px`;
+
+  return { left: null, bottom };
 }
 
-export function moveToolbeltToBottom(element: HTMLElement, bottom: number) {
+export function moveToolbeltToBottom(
+  element: HTMLElement,
+  bottom: number
+): Position {
   element.style.bottom = `${bottom}px`;
+
+  return { left: null, bottom };
+}
+
+export async function registerInitialize(element: HTMLElement) {
+  const data = await getToolbeltPosition();
+
+  if (data.bottom !== null) {
+    moveToolbeltToBottom(element, data.bottom);
+  }
 }
 
 export function registerEvent(element: HTMLElement) {
@@ -16,6 +35,7 @@ export function registerEvent(element: HTMLElement) {
   let viewportHeight = 0;
   let toolbeltX = 0;
   let toolbeltY = 0;
+  let position: Position;
 
   const onMouseDown = (event: MouseEvent) => {
     startY = event.clientY;
@@ -37,7 +57,7 @@ export function registerEvent(element: HTMLElement) {
 
     const { clientY } = event;
     const offsetY = clientY - startY;
-    moveToolbeltToTop(element, toolbeltY + offsetY);
+    position = moveToolbeltToTop(element, toolbeltY + offsetY);
   };
 
   const onMouseUp = (event: MouseEvent) => {
@@ -53,8 +73,9 @@ export function registerEvent(element: HTMLElement) {
     enable: () => {
       element.addEventListener("mousedown", onMouseDown);
     },
-    disable: () => {
+    disable: (): Position => {
       element.removeEventListener("mousedown", onMouseDown);
+      return position;
     },
   };
 }

@@ -1,5 +1,6 @@
-import { EXACT_SELECTOR, PREFIX } from "./constant";
+import { registerInitialize } from "./core";
 import { findToolbeltElement } from "./helper";
+import { EXACT_SELECTOR, PREFIX } from "./constant";
 import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
 
 (() => {
@@ -12,6 +13,7 @@ import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
       return;
     }
 
+    registerInitialize(element);
     registerDefaultMenu(element);
     registerCustomizeMenu(element);
 

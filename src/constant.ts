@@ -1,6 +1,8 @@
 export const PREFIX = "adjust";
 
-export const STORAGE_KEY = `__${PREFIX.toUpperCase()}_DATA__`;
+export const STORAGE_LEFT = `__${PREFIX.toUpperCase()}_LEFT__`;
+
+export const STORAGE_BOTTOM = `__${PREFIX.toUpperCase()}_BOTTOM__`;
 
 export const EXACT_SELECTOR = ".positioned_design_toolbelt--root--INYO4";
 

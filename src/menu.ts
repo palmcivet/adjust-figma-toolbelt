@@ -12,6 +12,7 @@ import {
   registerCursor,
   registerEvent,
 } from "./core";
+import { setToolbeltPosition } from "./persistent";
 
 export function registerDefaultMenu(element: HTMLElement) {
   let id: number;
@@ -19,7 +20,8 @@ export function registerDefaultMenu(element: HTMLElement) {
   const onPin = () => {
     GM_unregisterMenuCommand(id);
 
-    moveToolbeltToTop(element, DEFAULT_TOP);
+    const position = moveToolbeltToTop(element, DEFAULT_TOP);
+    setToolbeltPosition(position);
 
     id = GM_registerMenuCommand(LABEL_UNPIN_DEFAULT_TOP, onUnpin);
   };
@@ -27,7 +29,8 @@ export function registerDefaultMenu(element: HTMLElement) {
   const onUnpin = () => {
     GM_unregisterMenuCommand(id);
 
-    moveToolbeltToBottom(element, DEFAULT_BOTTOM);
+    const position = moveToolbeltToBottom(element, DEFAULT_BOTTOM);
+    setToolbeltPosition(position);
 
     id = GM_registerMenuCommand(LABEL_PIN_DEFAULT_TOP, onPin);
   };
@@ -38,14 +41,14 @@ export function registerDefaultMenu(element: HTMLElement) {
 export function registerCustomizeMenu(element: HTMLElement) {
   let id: number;
 
-  const mouseEvent = registerEvent(element);
   const cursorStyle = registerCursor(element);
+  const mouseEvent = registerEvent(element);
 
   const onStart = () => {
     GM_unregisterMenuCommand(id);
 
-    mouseEvent.enable();
     cursorStyle.enable();
+    mouseEvent.enable();
 
     id = GM_registerMenuCommand(LABEL_STOP_CUSTOM_POSITION, onStop);
   };
@@ -53,8 +56,9 @@ export function registerCustomizeMenu(element: HTMLElement) {
   const onStop = () => {
     GM_unregisterMenuCommand(id);
 
-    mouseEvent.disable();
     cursorStyle.disable();
+    const position = mouseEvent.disable();
+    setToolbeltPosition(position);
 
     id = GM_registerMenuCommand(LABEL_START_CUSTOM_POSITION, onStop);
   };
