@@ -1,5 +1,5 @@
-import { registerInitialize } from "./core";
 import { findToolbeltElement } from "./helper";
+import { registerAnimation, registerInitialize } from "./core";
 import { EXACT_SELECTOR, PREFIX } from "./constant";
 import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
 
@@ -13,11 +13,12 @@ import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
       return;
     }
 
+    registerAnimation(element);
     registerInitialize(element);
     registerDefaultMenu(element);
     registerCustomizeMenu(element);
 
-    console.log(`[${PREFIX}] The script is enabled.`);
+    console.info(`[${PREFIX}] The script is enabled.`);
   }
 
   const _onload_ = window.onload || function () {};

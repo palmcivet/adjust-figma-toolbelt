@@ -9,7 +9,7 @@ export async function getToolbeltPosition(): Promise<Position> {
   const left = await GM.getValue<number>(STORAGE_LEFT);
   const bottom = await GM.getValue<number>(STORAGE_BOTTOM);
 
-  console.log(`[${PREFIX}] Read persistent data: ${left}, ${bottom}.`);
+  console.info(`[${PREFIX}] Read persistent data: ${left}, ${bottom}.`);
 
   return {
     left: left ?? null,
@@ -21,7 +21,7 @@ export async function setToolbeltPosition({
   left,
   bottom,
 }: Position): Promise<void> {
-  console.log(`[${PREFIX}] Save persistent data: ${left}, ${bottom}.`);
+  console.info(`[${PREFIX}] Save persistent data: ${left}, ${bottom}.`);
 
   await GM.setValue(STORAGE_LEFT, left);
   await GM.setValue(STORAGE_BOTTOM, bottom);

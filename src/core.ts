@@ -19,6 +19,10 @@ export function moveToolbeltToBottom(
   return { left: null, bottom };
 }
 
+export function registerAnimation(element: HTMLElement) {
+  element.style.transition = "bottom 0.3s ease-in-out";
+}
+
 export async function registerInitialize(element: HTMLElement) {
   const data = await getToolbeltPosition();
 
@@ -27,7 +31,7 @@ export async function registerInitialize(element: HTMLElement) {
   }
 }
 
-export function registerEvent(element: HTMLElement) {
+export function bindMouseEvent(element: HTMLElement) {
   let isDragging = false;
   let startX = 0;
   let startY = 0;
@@ -80,7 +84,7 @@ export function registerEvent(element: HTMLElement) {
   };
 }
 
-export function registerCursor(element: HTMLElement) {
+export function bindCursorStyle(element: HTMLElement) {
   let cursorStyle = "default";
 
   const enable = () => {
@@ -98,7 +102,7 @@ export function registerCursor(element: HTMLElement) {
   };
 }
 
-export function registerFloatMenu(element: HTMLElement) {
+export function bindFloatMenu(element: HTMLElement) {
   const enable = () => {};
 
   const disable = () => {};

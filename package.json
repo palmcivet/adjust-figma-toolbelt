@@ -10,7 +10,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite ./demo",
-    "build": "vite build"
+    "build": "vite build",
+    "watch": "vite build --watch"
   },
   "devDependencies": {
     "@types/tampermonkey": "^5.0.3",
