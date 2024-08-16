@@ -1,6 +1,6 @@
 import { findToolbeltElement } from "./helper";
 import { registerAnimation, registerInitialize } from "./core";
-import { EXACT_SELECTOR, PREFIX } from "./constant";
+import { TOOLBELT_SELECTOR, PREFIX } from "./constant";
 import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
 
 (() => {
@@ -8,7 +8,7 @@ import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
     const element = findToolbeltElement();
     if (!element) {
       console.error(
-        `[${PREFIX}] Can not find figma toolbelt: \`${EXACT_SELECTOR}\`.`
+        `[${PREFIX}] Can not find figma toolbelt: \`${TOOLBELT_SELECTOR}\`.`
       );
       return;
     }

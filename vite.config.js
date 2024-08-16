@@ -14,6 +14,7 @@ const BANNER = `/* eslint-disable */
 // @match       https://www.figma.com/design/*
 // @grant       GM_setValue
 // @grant       GM_getValue
+// @grant       GM_addStyle
 // @grant       GM_registerMenuCommand
 // @grant       GM_unregisterMenuCommand
 // ==/UserScript==`;

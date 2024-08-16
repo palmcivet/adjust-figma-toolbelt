@@ -11,6 +11,7 @@ import {
   moveToolbeltToTop,
   bindCursorStyle,
   bindMouseEvent,
+  updateFloatMenu,
 } from "./core";
 import { createMenuStore } from "./helper";
 import { setToolbeltPosition } from "./persistent";
@@ -23,6 +24,7 @@ export function registerDefaultMenu(element: HTMLElement) {
 
     const position = moveToolbeltToTop(element, DEFAULT_TOP);
     setToolbeltPosition(position);
+    updateFloatMenu(element);
   };
 
   const onUnpin = () => {
@@ -30,6 +32,7 @@ export function registerDefaultMenu(element: HTMLElement) {
 
     const position = moveToolbeltToBottom(element, DEFAULT_BOTTOM);
     setToolbeltPosition(position);
+    updateFloatMenu(element);
   };
 
   menuStore.update("DEFAULT", LABEL_PIN_DEFAULT_TOP, onPin);
@@ -52,6 +55,7 @@ export function registerCustomizeMenu(element: HTMLElement) {
     cursorStyle.disable();
     const position = mouseEvent.disable();
     setToolbeltPosition(position);
+    updateFloatMenu(element);
   };
 
   menuStore.update("CUSTOMIZE", LABEL_START_CUSTOM_POSITION, onStart);

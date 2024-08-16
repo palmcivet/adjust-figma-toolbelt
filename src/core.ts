@@ -1,3 +1,4 @@
+import { FLOAT_MENU_STYLE, FLOAT_MENU_TOP } from "./constant";
 import { getToolbeltPosition } from "./persistent";
 
 export function moveToolbeltToTop(element: HTMLElement, top: number): Position {
@@ -19,6 +20,19 @@ export function moveToolbeltToBottom(
   return { left: null, bottom };
 }
 
+let styleElement: HTMLStyleElement;
+export function updateFloatMenu(element: HTMLElement) {
+  const { top: toolbeltTop, height: toolbeltHeight } =
+    element.getBoundingClientRect();
+  const toolbeltBottom = window.innerHeight - toolbeltHeight;
+
+  if (toolbeltTop < FLOAT_MENU_TOP && toolbeltBottom > FLOAT_MENU_TOP) {
+    styleElement = GM_addStyle(FLOAT_MENU_STYLE);
+  } else {
+    styleElement?.remove();
+  }
+}
+
 export function registerAnimation(element: HTMLElement) {
   element.style.transition = "bottom 0.3s ease-in-out";
 }
@@ -29,6 +43,11 @@ export async function registerInitialize(element: HTMLElement) {
   if (data.bottom !== null) {
     moveToolbeltToBottom(element, data.bottom);
   }
+
+  // wait for the animation to finish and update the position.
+  setTimeout(() => {
+    updateFloatMenu(element);
+  }, 1000);
 }
 
 export function bindMouseEvent(element: HTMLElement) {
@@ -95,17 +114,6 @@ export function bindCursorStyle(element: HTMLElement) {
   const disable = () => {
     element.style.cursor = cursorStyle;
   };
-
-  return {
-    enable,
-    disable,
-  };
-}
-
-export function bindFloatMenu(element: HTMLElement) {
-  const enable = () => {};
-
-  const disable = () => {};
 
   return {
     enable,

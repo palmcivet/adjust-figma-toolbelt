@@ -1,7 +1,7 @@
-import { EXACT_SELECTOR } from "./constant";
+import { TOOLBELT_SELECTOR } from "./constant";
 
 export function findToolbeltElement() {
-  const exactElement = document.querySelector(EXACT_SELECTOR);
+  const exactElement = document.querySelector(TOOLBELT_SELECTOR);
   if (!exactElement) {
     return null;
   }
