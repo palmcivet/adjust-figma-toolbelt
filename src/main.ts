@@ -23,7 +23,6 @@ import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
   const _onload_ = window.onload || function () {};
   window.onload = (event) => {
     (_onload_ as any)(event);
-
-    onReady();
+    setTimeout(onReady, 1000);
   };
 })();

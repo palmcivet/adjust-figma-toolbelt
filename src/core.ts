@@ -53,8 +53,8 @@ export function bindMouseEvent(element: HTMLElement) {
     const { y } = element.getBoundingClientRect();
     toolbeltY = y;
 
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
+    window.document.addEventListener("mousemove", onMouseMove);
+    window.document.addEventListener("mouseup", onMouseUp);
 
     isDragging = true;
   };
@@ -74,8 +74,8 @@ export function bindMouseEvent(element: HTMLElement) {
 
     isDragging = false;
 
-    document.removeEventListener("mousemove", onMouseMove);
-    document.removeEventListener("mouseup", onMouseUp);
+    window.document.removeEventListener("mousemove", onMouseMove);
+    window.document.removeEventListener("mouseup", onMouseUp);
   };
 
   return {
