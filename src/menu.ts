@@ -11,12 +11,9 @@ import {
   moveToolbeltToTop,
   bindCursorStyle,
   bindMouseEvent,
-  updateFloatMenu,
 } from "./core";
-import { createMenuStore } from "./helper";
 import { setToolbeltPosition } from "./persistent";
-
-const menuStore = createMenuStore();
+import { floatMenuStore, menuStore, transitionStore } from "./singleton";
 
 export function registerDefaultMenu(element: HTMLElement) {
   const onPin = () => {
@@ -24,7 +21,8 @@ export function registerDefaultMenu(element: HTMLElement) {
 
     const position = moveToolbeltToTop(element, DEFAULT_TOP);
     setToolbeltPosition(position);
-    updateFloatMenu(element);
+
+    floatMenuStore.update(element);
   };
 
   const onUnpin = () => {
@@ -32,7 +30,8 @@ export function registerDefaultMenu(element: HTMLElement) {
 
     const position = moveToolbeltToBottom(element, DEFAULT_BOTTOM);
     setToolbeltPosition(position);
-    updateFloatMenu(element);
+
+    floatMenuStore.update(element);
   };
 
   menuStore.update("DEFAULT", LABEL_PIN_DEFAULT_TOP, onPin);
@@ -43,6 +42,8 @@ export function registerCustomizeMenu(element: HTMLElement) {
   const mouseEvent = bindMouseEvent(element);
 
   const onStart = () => {
+    transitionStore.disable(element);
+
     menuStore.update("CUSTOMIZE", LABEL_STOP_CUSTOM_POSITION, onStop);
 
     cursorStyle.enable();
@@ -55,7 +56,9 @@ export function registerCustomizeMenu(element: HTMLElement) {
     cursorStyle.disable();
     const position = mouseEvent.disable();
     setToolbeltPosition(position);
-    updateFloatMenu(element);
+    floatMenuStore.update(element);
+
+    transitionStore.enable(element);
   };
 
   menuStore.update("CUSTOMIZE", LABEL_START_CUSTOM_POSITION, onStart);

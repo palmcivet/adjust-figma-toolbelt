@@ -1,5 +1,5 @@
 import { findToolbeltElement } from "./helper";
-import { registerAnimation, registerInitialize } from "./core";
+import { registerInitialize } from "./core";
 import { TOOLBELT_SELECTOR, PREFIX } from "./constant";
 import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
 
@@ -13,7 +13,6 @@ import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
       return;
     }
 
-    registerAnimation(element);
     registerInitialize(element);
     registerDefaultMenu(element);
     registerCustomizeMenu(element);
