@@ -4,7 +4,10 @@
 
 ## Features
 
-![video](./assets/feature.mp4)
+<video width="100%" controls>
+  <source src="./assets/feature.mp4" alt="A video for demonstrating features" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Installation
 
