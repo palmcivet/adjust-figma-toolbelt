@@ -4,7 +4,7 @@
   "private": true,
   "author": "Palm Civet",
   "repository": "https://github.com/palmcivet/adjust-figma-toolbelt",
-  "homepage": "https://palmcivet.github.io/adjust-figma-toolbelt",
+  "homepage": "https://greasyfork.org/scripts/504114-adjust-figma-toolbelt",
   "bugs": "https://github.com/palmcivet/adjust-figma-toolbelt/issues",
   "license": "MIT",
   "type": "module",

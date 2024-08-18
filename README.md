@@ -11,8 +11,9 @@
 
 ## Installation
 
-- Greasy Fork
+- [Greasy Fork](https://greasyfork.org/scripts/504114-adjust-figma-toolbelt)
 - [Release](https://github.com/palmcivet/adjust-figma-toolbelt/release)
+- [Source](https://palmcivet.github.io/adjust-figma-toolbelt/main.js)
 
 ## Development
 
@@ -25,4 +26,4 @@ pnpm watch
 
 ## License
 
-See [MIT](./LICENSE)
+See [MIT](./LICENSE).
