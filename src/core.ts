@@ -28,10 +28,7 @@ export async function registerInitialize(element: HTMLElement) {
     moveToolbeltToBottom(element, data.bottom);
   }
 
-  // wait for the animation to finish and update the position.
-  setTimeout(() => {
-    floatMenuStore.update(element);
-  }, 1000);
+  floatMenuStore.update(element);
 }
 
 export function bindMouseEvent(element: HTMLElement) {

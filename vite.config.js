@@ -9,7 +9,7 @@ const BANNER = `/* eslint-disable */
 // @version     ${pkg.version}
 // @license     ${pkg.license}
 // @author      ${pkg.author}
-// @updateURL   ${pkg.homepage}/index.js
+// @updateURL   ${pkg.homepage}/main.js
 // @description ${pkg.name} is a versatile script designed to enhance your Figma experience by allowing you to reposition the toolbelt with ease.
 // @match       https://www.figma.com/design/*
 // @grant       GM_setValue

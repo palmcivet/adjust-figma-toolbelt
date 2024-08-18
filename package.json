@@ -9,7 +9,6 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "vite ./demo",
     "build": "vite build",
     "watch": "vite build --watch"
   },

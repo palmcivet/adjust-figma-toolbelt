@@ -46,18 +46,22 @@ function createMenuStore() {
 }
 
 function createFloatMenuStore() {
-  let styleElement: HTMLStyleElement;
+  let styleElement: HTMLStyleElement | undefined;
 
   const update = (element: HTMLElement) => {
-    const { top: toolbeltTop, height: toolbeltHeight } =
-      element.getBoundingClientRect();
-    const toolbeltBottom = window.innerHeight - toolbeltHeight;
+    // wait for the animation to finish and update the position.
+    setTimeout(() => {
+      const { top, bottom } = element.getBoundingClientRect();
+      const toolbeltBottom = window.innerHeight - bottom;
 
-    if (toolbeltTop < FLOAT_MENU_TOP && toolbeltBottom > FLOAT_MENU_TOP) {
-      styleElement = GM_addStyle(FLOAT_MENU_STYLE);
-    } else {
-      styleElement?.remove();
-    }
+      console.log(top, FLOAT_MENU_TOP, toolbeltBottom, FLOAT_MENU_TOP);
+
+      if (top < FLOAT_MENU_TOP && toolbeltBottom > FLOAT_MENU_TOP) {
+        styleElement = GM_addStyle(FLOAT_MENU_STYLE);
+      } else {
+        styleElement?.remove();
+      }
+    }, 1000);
   };
 
   return {

@@ -6,22 +6,28 @@ on:
       - "v*.*.*"
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout GitHub
-        uses: actions/checkout@master
-      - name: Install and Build
-        run: |
-          yarn
-          yarn build
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+      - name: Checkout branch
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          branch: gh-pages
-          folder: dist
-      - name: Release
-        uses: softprops/action-gh-release@v1
+          node-version: 20
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+      - name: Install and build
+        run: |
+          pnpm ci
+          pnpm build
+      - name: Release script
+        uses: softprops/action-gh-release@v2
         with:
           files: |
-            /dist/index.js
+            /dist/main.js
