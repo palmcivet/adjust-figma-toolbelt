@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    # tags:
-    #   - "v*.*.*"
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -26,11 +26,11 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # - name: Release
-      #   uses: softprops/action-gh-release@v2
-      #   with:
-      #     files: |
-      #       /dist/main.js
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            /dist/main.js
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
