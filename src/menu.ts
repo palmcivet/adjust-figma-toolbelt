@@ -1,5 +1,5 @@
 import {
-  DEFAULT_BOTTOM,
+  DEFAULT_PADDING,
   DEFAULT_TOP,
   LABEL_PIN_DEFAULT_TOP,
   LABEL_START_CUSTOM_POSITION,
@@ -28,7 +28,7 @@ export function registerDefaultMenu(element: HTMLElement) {
   const onUnpin = () => {
     menuStore.update("DEFAULT", LABEL_PIN_DEFAULT_TOP, onPin);
 
-    const position = moveToolbeltToBottom(element, DEFAULT_BOTTOM);
+    const position = moveToolbeltToBottom(element, DEFAULT_PADDING);
     setToolbeltPosition(position);
 
     floatMenuStore.update(element);

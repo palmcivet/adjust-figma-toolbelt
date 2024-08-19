@@ -1,3 +1,4 @@
+import { DEFAULT_PADDING, DEFAULT_TOP } from "./constant";
 import { getToolbeltPosition } from "./persistent";
 import { floatMenuStore, transitionStore } from "./singleton";
 
@@ -20,15 +21,40 @@ export function moveToolbeltToBottom(
   return { left: null, bottom };
 }
 
+async function resizeWindow(element: HTMLElement) {
+  const { height } = element.getBoundingClientRect();
+  const position = await getToolbeltPosition();
+  if (position.bottom + height + DEFAULT_PADDING > window.innerHeight) {
+    moveToolbeltToTop(element, DEFAULT_TOP);
+  } else {
+    moveToolbeltToBottom(element, position.bottom);
+  }
+}
+
 export async function registerInitialize(element: HTMLElement) {
   transitionStore.enable(element);
 
   const data = await getToolbeltPosition();
   if (data.bottom !== null) {
     moveToolbeltToBottom(element, data.bottom);
+    resizeWindow(element);
   }
 
   floatMenuStore.update(element);
+}
+
+export function registerResizeWindow(element: HTMLElement) {
+  const onResize = () => {
+    resizeWindow(element);
+  };
+
+  window.addEventListener("resize", onResize);
+
+  return {
+    unregister: () => {
+      window.removeEventListener("resize", onResize);
+    },
+  };
 }
 
 export function bindMouseEvent(element: HTMLElement) {
