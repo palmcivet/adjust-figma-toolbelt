@@ -9,8 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write
+      contents: write
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
@@ -34,7 +33,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            /dist/main.js
+            ./dist/main.js
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
