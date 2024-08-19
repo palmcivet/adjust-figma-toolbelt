@@ -1,11 +1,12 @@
 /* eslint-disable */
 // ==UserScript==
 // @name        adjust-figma-toolbelt
+// @name:zh-CN  adjust-figma-toolbelt
 // @namespace   https://github.com/palmcivet/adjust-figma-toolbelt
-// @version     0.0.0
+// @version     1.0.5
 // @license     MIT
 // @author      Palm Civet
-// @updateURL   https://palmcivet.github.io/adjust-figma-toolbelt/main.js
+// @updateURL   https://palmcivet.github.io/https://github.com/palmcivet/adjust-figma-toolbelt/main.js
 // @description adjust-figma-toolbelt is a versatile script designed to enhance your Figma experience by allowing you to reposition the toolbelt with ease.
 // @match       https://www.figma.com/design/*
 // @grant       GM_setValue
@@ -34,8 +35,8 @@ ${TOOLBELT_SELECTOR} [class*="scroll_container--clipContainer--"] {
 ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
   display: none !important;
 }`;
-  const DEFAULT_BOTTOM = 12;
-  const DEFAULT_TOP = 48 + DEFAULT_BOTTOM;
+  const DEFAULT_PADDING = 12;
+  const DEFAULT_TOP = 48 + DEFAULT_PADDING;
   const FLOAT_MENU_TOP = 184;
   const LABEL_PIN_DEFAULT_TOP = "⬆️ Pin the toolbelt to the top";
   const LABEL_UNPIN_DEFAULT_TOP = "🔝 The toolbelt is already at the top";
@@ -56,7 +57,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
     console.info(`[${PREFIX}] Read persistent data: ${left}, ${bottom}.`);
     return {
       left: left ?? null,
-      bottom: bottom ?? DEFAULT_BOTTOM
+      bottom: bottom ?? DEFAULT_PADDING
     };
   }
   async function setToolbeltPosition({
@@ -145,13 +146,34 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
     element.style.bottom = `${bottom}px`;
     return { left: null, bottom };
   }
+  async function resizeWindow(element) {
+    const { height } = element.getBoundingClientRect();
+    const position = await getToolbeltPosition();
+    if (position.bottom + height + DEFAULT_PADDING > window.innerHeight) {
+      moveToolbeltToTop(element, DEFAULT_TOP);
+    } else {
+      moveToolbeltToBottom(element, position.bottom);
+    }
+  }
   async function registerInitialize(element) {
     transitionStore.enable(element);
     const data = await getToolbeltPosition();
     if (data.bottom !== null) {
       moveToolbeltToBottom(element, data.bottom);
+      resizeWindow(element);
     }
     floatMenuStore.update(element);
+  }
+  function registerResizeWindow(element) {
+    const onResize = () => {
+      resizeWindow(element);
+    };
+    window.addEventListener("resize", onResize);
+    return {
+      unregister: () => {
+        window.removeEventListener("resize", onResize);
+      }
+    };
   }
   function bindMouseEvent(element) {
     let isDragging = false;
@@ -215,7 +237,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
     };
     const onUnpin = () => {
       menuStore.update("DEFAULT", LABEL_PIN_DEFAULT_TOP, onPin);
-      const position = moveToolbeltToBottom(element, DEFAULT_BOTTOM);
+      const position = moveToolbeltToBottom(element, DEFAULT_PADDING);
       setToolbeltPosition(position);
       floatMenuStore.update(element);
     };
@@ -251,6 +273,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
         return;
       }
       registerInitialize(element);
+      registerResizeWindow(element);
       registerDefaultMenu(element);
       registerCustomizeMenu(element);
       console.info(`[${PREFIX}] The script is enabled.`);
