@@ -5,6 +5,7 @@ import pkg from "./package.json";
 const BANNER = `/* eslint-disable */
 // ==UserScript==
 // @name        ${pkg.name}
+// @name:zh-CN  ${pkg.name}
 // @namespace   ${pkg.repository}
 // @version     ${pkg.version}
 // @license     ${pkg.license}
