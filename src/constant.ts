@@ -20,9 +20,9 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
   display: none !important;
 }`;
 
-export const DEFAULT_BOTTOM = 12;
+export const DEFAULT_PADDING = 12;
 
-export const DEFAULT_TOP = 48 + DEFAULT_BOTTOM;
+export const DEFAULT_TOP = 48 + DEFAULT_PADDING;
 
 export const FLOAT_MENU_TOP = 184;
 

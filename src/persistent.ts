@@ -1,6 +1,6 @@
 import {
   PREFIX,
-  DEFAULT_BOTTOM,
+  DEFAULT_PADDING,
   STORAGE_BOTTOM,
   STORAGE_LEFT,
 } from "./constant";
@@ -13,7 +13,7 @@ export async function getToolbeltPosition(): Promise<Position> {
 
   return {
     left: left ?? null,
-    bottom: bottom ?? DEFAULT_BOTTOM,
+    bottom: bottom ?? DEFAULT_PADDING,
   };
 }
 

@@ -8,6 +8,8 @@
 
 ![脚本的截图](./assets/screenshot.png)
 
+> 只能在浏览器使用，不支持 Figma Desktop，因为无法注入 JS。
+
 ## 安装
 
 有以下方式安装该脚本：
@@ -33,4 +35,4 @@ pnpm watch
 
 ## 许可证
 
-See [MIT](./LICENSE).
+[MIT](./LICENSE)

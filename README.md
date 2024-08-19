@@ -8,6 +8,8 @@ English | [中文](./README.zh-CN.md)
 
 ![a screenshot for this script](./assets/screenshot.png)
 
+> This script can only be used in browsers and is not supported for Figma Desktop because JS injection is not possible.
+
 ## Installation
 
 - [Greasy Fork](https://greasyfork.org/scripts/504114-adjust-figma-toolbelt)
@@ -31,4 +33,4 @@ pnpm watch
 
 ## License
 
-See [MIT](./LICENSE).
+[MIT](./LICENSE)

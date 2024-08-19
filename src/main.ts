@@ -1,5 +1,5 @@
 import { findToolbeltElement } from "./helper";
-import { registerInitialize } from "./core";
+import { registerInitialize, registerResizeWindow } from "./core";
 import { TOOLBELT_SELECTOR, PREFIX } from "./constant";
 import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
 
@@ -14,6 +14,7 @@ import { registerCustomizeMenu, registerDefaultMenu } from "./menu";
     }
 
     registerInitialize(element);
+    registerResizeWindow(element);
     registerDefaultMenu(element);
     registerCustomizeMenu(element);
 
