@@ -1,23 +1,24 @@
 /* eslint-disable */
 // ==UserScript==
-// @name        adjust-figma-toolbelt
-// @name:zh-CN  adjust-figma-toolbelt
-// @namespace   https://github.com/palmcivet/adjust-figma-toolbelt
-// @version     1.0.5
-// @license     MIT
-// @author      Palm Civet
-// @updateURL   https://palmcivet.github.io/https://github.com/palmcivet/adjust-figma-toolbelt/main.js
-// @description adjust-figma-toolbelt is a versatile script designed to enhance your Figma experience by allowing you to reposition the toolbelt with ease.
-// @match       https://www.figma.com/design/*
-// @grant       GM_setValue
-// @grant       GM_getValue
-// @grant       GM_addStyle
-// @grant       GM_registerMenuCommand
-// @grant       GM_unregisterMenuCommand
+// @name              adjust-figma-toolbelt
+// @name:zh-CN        adjust-figma-toolbelt
+// @namespace         https://github.com/palmcivet/adjust-figma-toolbelt
+// @version           1.0.6
+// @license           MIT
+// @author            Palm Civet
+// @updateURL         https://palmcivet.github.io/https://github.com/palmcivet/adjust-figma-toolbelt/main.js
+// @description       adjust-figma-toolbelt is a versatile script designed to enhance your Figma experience by allowing you to reposition the toolbelt with ease.
+// @description:zh-CN adjust-figma-toolbelt 是一个用于增强 Figma 体验的脚本，可以轻松地将工具栏调整到想要的位置。
+// @match             https://www.figma.com/design/*
+// @grant             GM_setValue
+// @grant             GM_getValue
+// @grant             GM_addStyle
+// @grant             GM_registerMenuCommand
+// @grant             GM_unregisterMenuCommand
 // ==/UserScript==
 (function() {
   "use strict";
-  // @license     MIT
+  // @license           MIT
   const PREFIX = "adjust";
   const STORAGE_LEFT = `__${PREFIX.toUpperCase()}_LEFT__`;
   const STORAGE_BOTTOM = `__${PREFIX.toUpperCase()}_BOTTOM__`;
@@ -42,7 +43,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
   const LABEL_UNPIN_DEFAULT_TOP = "🔝 The toolbelt is already at the top";
   const LABEL_START_CUSTOM_POSITION = "🎨 Customize the toolbelt position";
   const LABEL_STOP_CUSTOM_POSITION = "💾 Save the position and exit";
-  // @license     MIT
+  // @license           MIT
   function findToolbeltElement() {
     const element = window.document.querySelector(TOOLBELT_SELECTOR);
     if (!element) {
@@ -50,7 +51,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
     }
     return element;
   }
-  // @license     MIT
+  // @license           MIT
   async function getToolbeltPosition() {
     const left = await GM.getValue(STORAGE_LEFT);
     const bottom = await GM.getValue(STORAGE_BOTTOM);
@@ -68,7 +69,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
     await GM.setValue(STORAGE_LEFT, left);
     await GM.setValue(STORAGE_BOTTOM, bottom);
   }
-  // @license     MIT
+  // @license           MIT
   function createMenuStore() {
     const menuStore2 = /* @__PURE__ */ new Map();
     const _removeMenus = () => {
@@ -134,7 +135,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
   const menuStore = createMenuStore();
   const floatMenuStore = createFloatMenuStore();
   const transitionStore = createTransitionStore();
-  // @license     MIT
+  // @license           MIT
   function moveToolbeltToTop(element, top) {
     const { height: toolbeltHeight } = element.getBoundingClientRect();
     const { innerHeight: viewportHeight } = window;
@@ -227,7 +228,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
       disable
     };
   }
-  // @license     MIT
+  // @license           MIT
   function registerDefaultMenu(element) {
     const onPin = () => {
       menuStore.update("DEFAULT", LABEL_UNPIN_DEFAULT_TOP, onUnpin);
@@ -262,7 +263,7 @@ ${TOOLBELT_SELECTOR} [class*="pointing_dropdown--scrollIndicator--"] {
     };
     menuStore.update("CUSTOMIZE", LABEL_START_CUSTOM_POSITION, onStart);
   }
-  // @license     MIT
+  // @license           MIT
   (() => {
     function onReady() {
       const element = findToolbeltElement();
