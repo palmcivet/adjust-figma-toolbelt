@@ -6,7 +6,7 @@
 
 ## 特性
 
-![脚本的截图](./assets/screenshot.png)
+<video src="https://github.com/user-attachments/assets/9984eb37-5510-44f0-9992-d8b2b0802232" type="video/mp4"></video>
 
 > 只能在浏览器使用，不支持 Figma Desktop，因为无法注入 JS。
 

@@ -6,7 +6,7 @@ English | [中文](./README.zh-CN.md)
 
 ## Features
 
-![a screenshot for this script](./assets/screenshot.png)
+<video src="https://github.com/user-attachments/assets/9984eb37-5510-44f0-9992-d8b2b0802232" type="video/mp4"></video>
 
 > This script can only be used in browsers and is not supported for Figma Desktop because JS injection is not possible.
 
